@@ -1,0 +1,113 @@
+{
+  "nav": {
+    "dashboard":         "Dashboard",
+    "users":             "Users",
+    "products":          "Products",
+    "feesLimits":        "Fees & Limits",
+    "featureFlags":      "Feature Flags",
+    "auditLog":          "Audit Log",
+    "historyGenerator":  "History Generator",
+    "system":            "System"
+  },
+  "common": {
+    "save":        "Save",
+    "cancel":      "Cancel",
+    "edit":        "Edit",
+    "delete":      "Delete",
+    "create":      "Create",
+    "search":      "Search",
+    "filter":      "Filter",
+    "export":      "Export",
+    "loading":     "Loading…",
+    "noResults":   "No results found.",
+    "error":       "Something went wrong",
+    "success":     "Success",
+    "confirm":     "Confirm",
+    "back":        "Back",
+    "close":       "Close",
+    "active":      "Active",
+    "inactive":    "Inactive",
+    "enabled":     "Enabled",
+    "disabled":    "Disabled",
+    "yes":         "Yes",
+    "no":          "No",
+    "na":          "—"
+  },
+  "users": {
+    "title":           "Users",
+    "searchPlaceholder": "Search name, email, ID…",
+    "kycStatus": {
+      "not_started": "Not started",
+      "pending":     "Pending",
+      "verified":    "Verified",
+      "rejected":    "Rejected"
+    },
+    "accountStatus": {
+      "active":    "Active",
+      "suspended": "Suspended",
+      "closed":    "Closed"
+    },
+    "actions": {
+      "viewProfile":  "View profile",
+      "impersonate":  "Impersonate",
+      "suspend":      "Suspend",
+      "unsuspend":    "Unsuspend",
+      "reset2fa":     "Reset 2FA"
+    },
+    "columns": {
+      "id":        "ID",
+      "name":      "User",
+      "kyc":       "KYC",
+      "status":    "Status",
+      "created":   "Created",
+      "lastLogin": "Last login",
+      "balance":   "Balance"
+    }
+  },
+  "products": {
+    "title":   "Products",
+    "types": {
+      "current_account": "Current account",
+      "savings":         "Savings",
+      "debit_card":      "Debit card",
+      "credit_card":     "Credit card"
+    }
+  },
+  "txTypes": {
+    "sepa_transfer":  "SEPA transfer",
+    "card_payment":   "Card payment",
+    "atm_withdrawal": "ATM withdrawal",
+    "fx_exchange":    "FX exchange",
+    "standing_order": "Standing order",
+    "direct_debit":   "Direct debit",
+    "salary":         "Salary",
+    "refund":         "Refund",
+    "fee":            "Fee",
+    "interest":       "Interest"
+  },
+  "dashboard": {
+    "title":         "Dashboard",
+    "kpis": {
+      "totalUsers":      "Total users",
+      "activeAccounts":  "Active accounts",
+      "totalVolume":     "Total volume",
+      "fraudFlagsToday": "Fraud flags today",
+      "pendingKyc":      "Pending KYC",
+      "systemHealth":    "System health"
+    }
+  },
+  "generator": {
+    "title":       "History Generator",
+    "generate":    "Generate preview",
+    "import":      "Import transactions",
+    "importing":   "Importing…",
+    "success":     "Import successful",
+    "selectUser":  "Select a target user…"
+  },
+  "errors": {
+    "unauthorized": "You are not authorised to perform this action.",
+    "notFound":     "The requested resource was not found.",
+    "serverError":  "A server error occurred. Please try again.",
+    "validation":   "Please check the form for errors."
+  }
+}

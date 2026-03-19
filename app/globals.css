@@ -1,0 +1,189 @@
+/* ── Fonts — must be first ──────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* ── Light mode (client app) ──────────────────────────────────────────────── */
+  :root {
+    --background:         0 0% 98%;
+    --foreground:         220 15% 10%;
+    --card:               0 0% 100%;
+    --card-foreground:    220 15% 10%;
+    --popover:            0 0% 100%;
+    --popover-foreground: 220 15% 10%;
+    --primary:            213 90% 45%;
+    --primary-foreground: 0 0% 100%;
+    --secondary:          220 14% 94%;
+    --secondary-foreground: 220 14% 20%;
+    --muted:              220 14% 95%;
+    --muted-foreground:   220 10% 46%;
+    --accent:             220 14% 93%;
+    --accent-foreground:  220 14% 20%;
+    --destructive:        0 84% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border:             220 13% 88%;
+    --input:              220 13% 88%;
+    --ring:               213 90% 45%;
+    --radius:             0.375rem;
+
+    --success:            151 60% 40%;
+    --success-foreground: 0 0% 100%;
+    --success-muted:      151 50% 94%;
+    --warning:            36 95% 48%;
+    --warning-foreground: 0 0% 100%;
+    --warning-muted:      40 100% 94%;
+
+    --accent-green:  151 62% 54%;
+    --accent-red:    0 100% 70%;
+    --accent-yellow: 41 100% 70%;
+    --accent-blue:   211 100% 73%;
+  }
+
+  /* ── Dark mode (superadmin) ─────────────────────────────────────────────── */
+  .dark {
+    --background:         26 13% 9%;
+    --foreground:         35 14% 93%;
+    --card:               26 12% 13%;
+    --card-foreground:    35 14% 93%;
+    --popover:            26 12% 13%;
+    --popover-foreground: 35 14% 93%;
+    --primary:            213 90% 62%;
+    --primary-foreground: 26 13% 9%;
+    --secondary:          26 12% 18%;
+    --secondary-foreground: 35 10% 76%;
+    --muted:              26 12% 16%;
+    --muted-foreground:   30 8% 47%;
+    --accent:             26 12% 20%;
+    --accent-foreground:  35 10% 76%;
+    --destructive:        0 100% 70%;
+    --destructive-foreground: 0 0% 100%;
+    --border:             26 11% 23%;
+    --input:              26 11% 23%;
+    --ring:               213 90% 62%;
+
+    --success:            151 62% 54%;
+    --success-foreground: 26 13% 9%;
+    --success-muted:      151 40% 14%;
+    --warning:            41 100% 70%;
+    --warning-foreground: 26 13% 9%;
+    --warning-muted:      41 50% 14%;
+
+    --accent-green:  151 62% 54%;
+    --accent-red:    0 100% 70%;
+    --accent-yellow: 41 100% 70%;
+    --accent-blue:   211 100% 73%;
+  }
+
+  * { @apply border-border; }
+  html { @apply scroll-smooth; }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3 { @apply font-semibold tracking-tight; }
+  h1 { @apply text-2xl; }
+  h2 { @apply text-lg; }
+
+  .tabular-nums { font-family: 'IBM Plex Mono', monospace; }
+}
+
+/* ── Superadmin dark shell ─────────────────────────────────────────────────── */
+/* Superadmin + Admin dark shell — directly overrides CSS vars for dark theme */
+.superadmin-shell,
+.superadmin-shell * {
+  color-scheme: dark;
+}
+.superadmin-shell {
+  --background:         26 13% 9%;
+  --foreground:         35 14% 93%;
+  --card:               26 12% 13%;
+  --card-foreground:    35 14% 93%;
+  --popover:            26 12% 13%;
+  --popover-foreground: 35 14% 93%;
+  --primary:            213 90% 62%;
+  --primary-foreground: 26 13% 9%;
+  --secondary:          26 12% 18%;
+  --secondary-foreground: 35 10% 76%;
+  --muted:              26 12% 16%;
+  --muted-foreground:   30 8% 47%;
+  --accent:             26 12% 20%;
+  --accent-foreground:  35 10% 76%;
+  --destructive:        0 100% 70%;
+  --destructive-foreground: 0 0% 100%;
+  --border:             26 11% 23%;
+  --input:              26 11% 23%;
+  --ring:               213 90% 62%;
+  --success:            151 62% 54%;
+  --success-foreground: 26 13% 9%;
+  --success-muted:      151 40% 14%;
+  --warning:            41 100% 70%;
+  --warning-foreground: 26 13% 9%;
+  --warning-muted:      41 50% 14%;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+/* ── KPI accent bar ────────────────────────────────────────────────────────── */
+.kpi-card {
+  position: relative;
+  overflow: hidden;
+}
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+}
+.kpi-accent-green::before  { background: hsl(var(--accent-green)); }
+.kpi-accent-blue::before   { background: hsl(var(--accent-blue)); }
+.kpi-accent-yellow::before { background: hsl(var(--accent-yellow)); }
+.kpi-accent-red::before    { background: hsl(var(--accent-red)); }
+
+/* ── Status dots ───────────────────────────────────────────────────────────── */
+.dot-pulse {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: hsl(var(--accent-green));
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+/* ── Uppercase labels ──────────────────────────────────────────────────────── */
+.label-xs {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+}
+
+/* ── Mono value ────────────────────────────────────────────────────────────── */
+.mono-val {
+  font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: -.02em;
+}
+
+/* ── Scrollbar thin ────────────────────────────────────────────────────────── */
+.scrollbar-thin::-webkit-scrollbar       { width: 4px; height: 4px; }
+.scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 2px; }
+
+/* ── Data table header ─────────────────────────────────────────────────────── */
+.data-table th {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+}
+
+/* ── Transition defaults ───────────────────────────────────────────────────── */
+button, a, [role="button"] { transition: all .13s ease; }

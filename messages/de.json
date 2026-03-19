@@ -1,0 +1,92 @@
+{
+  "nav": {
+    "dashboard":         "Dashboard",
+    "users":             "Benutzer",
+    "products":          "Produkte",
+    "feesLimits":        "Gebühren & Limits",
+    "featureFlags":      "Feature-Flags",
+    "auditLog":          "Audit-Protokoll",
+    "historyGenerator":  "Verlaufsgenerator",
+    "system":            "System"
+  },
+  "common": {
+    "save":        "Speichern",
+    "cancel":      "Abbrechen",
+    "edit":        "Bearbeiten",
+    "delete":      "Löschen",
+    "create":      "Erstellen",
+    "search":      "Suchen",
+    "filter":      "Filtern",
+    "export":      "Exportieren",
+    "loading":     "Laden…",
+    "noResults":   "Keine Ergebnisse gefunden.",
+    "error":       "Ein Fehler ist aufgetreten",
+    "success":     "Erfolgreich",
+    "confirm":     "Bestätigen",
+    "back":        "Zurück",
+    "close":       "Schließen",
+    "active":      "Aktiv",
+    "inactive":    "Inaktiv",
+    "enabled":     "Aktiviert",
+    "disabled":    "Deaktiviert",
+    "yes":         "Ja",
+    "no":          "Nein",
+    "na":          "—"
+  },
+  "users": {
+    "title":             "Benutzer",
+    "searchPlaceholder": "Name, E-Mail, ID suchen…",
+    "kycStatus": {
+      "not_started": "Nicht gestartet",
+      "pending":     "Ausstehend",
+      "verified":    "Verifiziert",
+      "rejected":    "Abgelehnt"
+    },
+    "accountStatus": {
+      "active":    "Aktiv",
+      "suspended": "Gesperrt",
+      "closed":    "Geschlossen"
+    },
+    "actions": {
+      "viewProfile":  "Profil anzeigen",
+      "impersonate":  "Imitieren",
+      "suspend":      "Sperren",
+      "unsuspend":    "Entsperren",
+      "reset2fa":     "2FA zurücksetzen"
+    },
+    "columns": {
+      "id":        "ID",
+      "name":      "Benutzer",
+      "kyc":       "KYC",
+      "status":    "Status",
+      "created":   "Erstellt",
+      "lastLogin": "Letzter Login",
+      "balance":   "Kontostand"
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "kpis": {
+      "totalUsers":      "Gesamtnutzer",
+      "activeAccounts":  "Aktive Konten",
+      "totalVolume":     "Gesamtvolumen",
+      "fraudFlagsToday": "Betrugshinweise heute",
+      "pendingKyc":      "Ausstehende KYC",
+      "systemHealth":    "Systemzustand"
+    }
+  },
+  "generator": {
+    "title":      "Verlaufsgenerator",
+    "generate":   "Vorschau generieren",
+    "import":     "Transaktionen importieren",
+    "importing":  "Importieren…",
+    "success":    "Import erfolgreich",
+    "selectUser": "Zielbenutzer auswählen…"
+  },
+  "errors": {
+    "unauthorized": "Sie sind nicht berechtigt, diese Aktion durchzuführen.",
+    "notFound":     "Die angeforderte Ressource wurde nicht gefunden.",
+    "serverError":  "Ein Serverfehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+    "validation":   "Bitte überprüfen Sie das Formular auf Fehler."
+  }
+}

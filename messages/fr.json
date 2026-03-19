@@ -1,0 +1,32 @@
+{
+  "nav": {
+    "dashboard":         "Tableau de bord",
+    "users":             "Utilisateurs",
+    "products":          "Produits",
+    "feesLimits":        "Frais & Limites",
+    "featureFlags":      "Indicateurs de fonctionnalité",
+    "auditLog":          "Journal d'audit",
+    "historyGenerator":  "Générateur d'historique",
+    "system":            "Système"
+  },
+  "common": {
+    "save": "Enregistrer", "cancel": "Annuler", "edit": "Modifier",
+    "delete": "Supprimer", "create": "Créer", "search": "Rechercher",
+    "filter": "Filtrer", "export": "Exporter", "loading": "Chargement…",
+    "noResults": "Aucun résultat.", "error": "Une erreur est survenue",
+    "success": "Succès", "confirm": "Confirmer", "back": "Retour",
+    "close": "Fermer", "active": "Actif", "inactive": "Inactif",
+    "enabled": "Activé", "disabled": "Désactivé", "yes": "Oui", "no": "Non", "na": "—"
+  },
+  "users": {
+    "title": "Utilisateurs",
+    "searchPlaceholder": "Rechercher nom, email, ID…",
+    "kycStatus": { "not_started": "Non commencé", "pending": "En attente", "verified": "Vérifié", "rejected": "Rejeté" },
+    "accountStatus": { "active": "Actif", "suspended": "Suspendu", "closed": "Fermé" },
+    "actions": { "viewProfile": "Voir profil", "impersonate": "Imiter", "suspend": "Suspendre", "unsuspend": "Réactiver", "reset2fa": "Réinitialiser 2FA" },
+    "columns": { "id": "ID", "name": "Utilisateur", "kyc": "KYC", "status": "Statut", "created": "Créé", "lastLogin": "Dernière connexion", "balance": "Solde" }
+  },
+  "dashboard": { "title": "Tableau de bord", "kpis": { "totalUsers": "Total utilisateurs", "activeAccounts": "Comptes actifs", "totalVolume": "Volume total", "fraudFlagsToday": "Alertes fraude aujourd'hui", "pendingKyc": "KYC en attente", "systemHealth": "Santé système" } },
+  "generator": { "title": "Générateur d'historique", "generate": "Générer un aperçu", "import": "Importer les transactions", "importing": "Importation…", "success": "Import réussi", "selectUser": "Sélectionner un utilisateur…" },
+  "errors": { "unauthorized": "Vous n'êtes pas autorisé.", "notFound": "Ressource introuvable.", "serverError": "Erreur serveur. Réessayez.", "validation": "Vérifiez le formulaire." }
+}
