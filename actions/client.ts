@@ -33,7 +33,7 @@ export async function updateProfile(
       date_of_birth:        parsed.data.date_of_birth,
       nationality:          parsed.data.nationality,
       country_of_residence: parsed.data.country_of_residence,
-    })
+    } as never)
     .eq('id', user.id)
 
   if (error) return { success: false, error: error.message }

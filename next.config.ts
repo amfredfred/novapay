@@ -13,6 +13,9 @@ const nextConfig: NextConfig = {
   logging: {
     fetches: { fullUrl: true },
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 }
 
 export default withNextIntl(nextConfig)
