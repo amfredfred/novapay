@@ -1,10 +1,11 @@
 // app/[locale]/(client)/cards/cards-client.tsx
 'use client'
 
-import { useState, useTransition } from 'react'
+import { useState, useEffect, useTransition } from 'react'
+import { useRouter } from 'next/navigation'
 import { Lock, Unlock, Eye, EyeOff, CreditCard, Plus, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
-import { toggleCardFreeze } from '@/actions/client'
+import { toggleCardFreeze, issueCard } from '@/actions/client'
 import type { Card } from '@/types/supabase'
 
 function CardVisual({ card }: { card: Card }) {
@@ -128,9 +129,26 @@ function CardPanel({ card, onStatusChange }: { card: Card; onStatusChange: (id: 
 
 export function CardsClient({ initialCards }: { initialCards: Card[] }) {
   const [cards, setCards] = useState(initialCards)
+  const [isPending, start] = useTransition()
+  const router = useRouter()
+
+  // useState only seeds from initialCards on first mount — resync when the
+  // server component re-fetches (e.g. after router.refresh()).
+  useEffect(() => {
+    setCards(initialCards)
+  }, [initialCards])
 
   function onStatusChange(id: string, status: string) {
     setCards(prev => prev.map(c => c.id === id ? { ...c, status: status as Card['status'] } : c))
+  }
+
+  function handleIssueCard() {
+    start(async () => {
+      const res = await issueCard()
+      if (!res.success) { toast.error('Failed to issue card', { description: res.error }); return }
+      toast.success('Virtual card issued')
+      router.refresh()
+    })
   }
 
   if (cards.length === 0) {
@@ -141,8 +159,13 @@ export function CardsClient({ initialCards }: { initialCards: Card[] }) {
         </div>
         <h3 className="font-semibold text-foreground mb-2">No cards yet</h3>
         <p className="text-sm text-muted-foreground mb-6">Get a virtual card instantly, or order a physical card delivered to you</p>
-        <button className="inline-flex items-center gap-2 bg-primary text-white text-sm font-medium px-5 py-2.5 rounded-xl hover:bg-primary/90 transition-colors">
-          <Plus className="h-4 w-4" /> Get your first card
+        <button
+          onClick={handleIssueCard}
+          disabled={isPending}
+          className="inline-flex items-center gap-2 bg-primary text-white text-sm font-medium px-5 py-2.5 rounded-xl hover:bg-primary/90 transition-colors disabled:opacity-60"
+        >
+          {isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Plus className="h-4 w-4" />}
+          Get your first card
         </button>
       </div>
     )

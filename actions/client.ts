@@ -205,6 +205,61 @@ export async function openAccount(
   return { success: true, data: { accountId: account.id } }
 }
 
+// ── issueCard ─────────────────────────────────────────────────────────────────
+
+function generateLastFour(): string {
+  return String(Math.floor(1000 + Math.random() * 9000))
+}
+
+export async function issueCard(): Promise<ActionResult<{ cardId: string }>> {
+  const user = await requireClient()
+  const supabase = await createClient()
+
+  const { data: account } = await supabase
+    .from('accounts')
+    .select('id, product_id')
+    .eq('user_id', user.id)
+    .order('is_primary', { ascending: false })
+    .limit(1)
+    .maybeSingle()
+
+  if (!account) return { success: false, error: 'Open an account before requesting a card' }
+
+  const { data: cardProduct } = await supabase
+    .from('products')
+    .select('id')
+    .in('type', ['debit_card', 'credit_card'])
+    .eq('is_active', true)
+    .limit(1)
+    .maybeSingle()
+
+  const expiresAt = new Date()
+  expiresAt.setFullYear(expiresAt.getFullYear() + 4)
+
+  const { data: card, error } = await supabase
+    .from('cards')
+    .insert({
+      account_id:  account.id,
+      user_id:     user.id,
+      product_id:  cardProduct?.id ?? account.product_id,
+      last_four:   generateLastFour(),
+      card_type:   'virtual',
+      network:     'visa',
+      status:      'active',
+      expires_at:  expiresAt.toISOString().slice(0, 10),
+      is_virtual:  true,
+      daily_limit: 2000,
+    } as never)
+    .select('id')
+    .single()
+
+  if (error || !card) return { success: false, error: error?.message ?? 'Failed to issue card' }
+
+  revalidatePath('/cards')
+  revalidatePath('/dashboard')
+  return { success: true, data: { cardId: card.id } }
+}
+
 // ── executeTransfer ───────────────────────────────────────────────────────────
 
 const TransferSchema = z.object({

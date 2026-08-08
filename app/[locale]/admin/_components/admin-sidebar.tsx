@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { LayoutDashboard, Users, ShieldCheck, Receipt, MessageSquare, HeadphonesIcon, UserPlus } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { LogoMark } from '@/components/logo'
 
 const NAV = [
   { href: '/admin/dashboard',    label: 'Dashboard',    Icon: LayoutDashboard },
@@ -22,9 +23,7 @@ export function AdminSidebar({ canCreateUsers }: { canCreateUsers: boolean }) {
   return (
     <aside className="hidden md:flex w-[220px] flex-col shrink-0 border-r border-border bg-card overflow-y-auto">
       <div className="flex items-center gap-2.5 h-14 px-5 border-b border-border">
-        <div className="w-7 h-7 bg-secondary rounded-lg flex items-center justify-center">
-          <HeadphonesIcon className="w-3.5 h-3.5 text-white" />
-        </div>
+        <LogoMark size={28} className="rounded-lg" />
         <div>
           <p className="text-sm font-semibold leading-none text-foreground">NovaPay</p>
           <p className="text-[10px] font-medium uppercase tracking-widest text-muted-foreground/70 mt-0.5">Admin portal</p>

@@ -21,7 +21,10 @@ function localeRedirect(request: NextRequest, targetPath: string): NextResponse 
   const locale = localeMatch ? localeMatch[1] : 'en'
   // For default locale (en) with as-needed prefix, don't add /en
   const prefix = locale === routing.defaultLocale ? '' : `/${locale}`
-  url.pathname = `${prefix}${targetPath}`
+  // Split off any query string so it lands in url.search, not the percent-encoded pathname
+  const [path, query] = targetPath.split('?')
+  url.pathname = `${prefix}${path}`
+  url.search = query ? `?${query}` : ''
   return NextResponse.redirect(url)
 }
 
@@ -108,10 +111,9 @@ export async function middleware(request: NextRequest) {
     if (!user) {
       return localeRedirect(request, `/login?next=${encodeURIComponent(pathname)}`)
     }
-    // Staff accidentally hitting client routes → send to their portal selector
-    if (role === 'superadmin' || role === 'admin') {
-      return localeRedirect(request, '/portal-select')
-    }
+    // Staff can use the client portal as themselves (that's what "My banking app" on
+    // /portal-select links to) — only the auth-page redirect below sends them to the
+    // portal selector on login, not every subsequent visit to a client route.
     return intlResponse
   }
 
@@ -131,6 +133,6 @@ export async function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     // Match all paths except Next.js internals and static files
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    '/((?!_next/static|_next/image|favicon.ico|icon|apple-icon|opengraph-image|twitter-image|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
 }

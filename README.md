@@ -153,6 +153,28 @@ pnpm typecheck  # zero errors expected
 pnpm build      # production build
 ```
 
+## Deploy to Cloudflare
+
+Runs on Cloudflare Workers via [OpenNext](https://opennext.js.org/cloudflare) (`@opennextjs/cloudflare` + `wrangler`).
+
+```bash
+# 1. Log in to Cloudflare (one-time)
+npx wrangler login
+
+# 2. Set production secrets (never commit these — they don't go in wrangler.jsonc)
+npx wrangler secret put NEXT_PUBLIC_SUPABASE_URL
+npx wrangler secret put NEXT_PUBLIC_SUPABASE_ANON_KEY
+npx wrangler secret put SUPABASE_SERVICE_ROLE_KEY
+
+# 3. Build + preview locally against the Workers runtime
+npm run preview
+
+# 4. Build + deploy
+npm run deploy
+```
+
+Config lives in `wrangler.jsonc` (worker name, assets binding, `nodejs_compat` flag) and `open-next.config.ts`. For local `wrangler dev`/`preview` env vars, copy `.dev.vars.example` to `.dev.vars` (gitignored).
+
 ## Key Patterns
 
 **Server Actions with triple auth:**

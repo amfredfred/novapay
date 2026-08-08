@@ -7,6 +7,7 @@ import {
   RefreshCw, Receipt, Settings, ShieldCheck, HelpCircle,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { LogoMark } from '@/components/logo'
 
 const NAV = [
   { href: '/dashboard',      label: 'Dashboard',    Icon: LayoutDashboard },
@@ -36,9 +37,7 @@ export function ClientSidebar() {
     <aside className="hidden md:flex w-[220px] flex-col shrink-0 border-r border-border bg-card overflow-y-auto">
       {/* Logo */}
       <div className="flex items-center gap-2.5 h-16 px-5 border-b border-border">
-        <div className="w-7 h-7 bg-primary rounded-lg flex items-center justify-center">
-          <ShieldCheck className="w-4 h-4 text-primary-foreground" />
-        </div>
+        <LogoMark size={28} className="rounded-lg" />
         <span className="font-semibold text-foreground tracking-tight">NovaPay</span>
       </div>
 

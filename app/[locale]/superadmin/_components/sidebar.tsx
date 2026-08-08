@@ -9,6 +9,7 @@ import {
   Globe, ArrowDownToLine, UserCheck, Send, MessageCircle,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { LogoMark } from '@/components/logo'
 
 const NAV = [
   { href: '/superadmin/dashboard',         label: 'Dashboard',          Icon: LayoutDashboard },
@@ -34,9 +35,7 @@ export function Sidebar() {
     <aside className="flex w-[220px] flex-col shrink-0 border-r border-border bg-background overflow-y-auto">
       {/* Logo */}
       <div className="flex items-center gap-2.5 h-14 px-4 border-b border-border">
-        <div className="flex items-center justify-center w-7 h-7 rounded-lg bg-primary">
-          <ShieldCheck className="w-4 h-4 text-primary-foreground" />
-        </div>
+        <LogoMark size={28} className="rounded-lg" />
         <div>
           <p className="text-sm font-semibold leading-none tracking-tight">NovaPay</p>
           <p className="text-[10px] font-medium uppercase tracking-widest text-muted-foreground mt-0.5">

@@ -14,7 +14,7 @@ export default function MaintenancePage() {
       </p>
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
         <ShieldCheck className="w-4 h-4 text-green-500" />
-        Your money is protected and FSCS insured
+        Your account data is safe — this is a demo environment
       </div>
     </div>
   )

@@ -6,6 +6,7 @@ import {
   ShieldCheck, Zap, Globe, TrendingUp, CreditCard,
   ArrowRight, Star, CheckCircle, Lock, Smartphone,
 } from 'lucide-react'
+import { LogoMark } from '@/components/logo'
 
 // Redirect if already logged in
 export default async function LandingPage() {
@@ -24,9 +25,7 @@ export default async function LandingPage() {
       <nav className="border-b border-border sticky top-0 bg-background/95 backdrop-blur z-50">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <ShieldCheck className="w-4 h-4 text-white" />
-            </div>
+            <LogoMark size={32} className="rounded-lg" />
             <span className="font-semibold text-lg tracking-tight">NovaPay</span>
           </div>
           <div className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
@@ -53,9 +52,9 @@ export default async function LandingPage() {
 
       {/* Hero */}
       <section className="max-w-6xl mx-auto px-6 pt-20 pb-24 text-center">
-        <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 text-sm font-medium px-4 py-1.5 rounded-full mb-8 border border-blue-100">
+        <div className="inline-flex items-center gap-2 bg-primary/10 text-primary text-sm font-medium px-4 py-1.5 rounded-full mb-8 border border-primary/20">
           <Star className="w-3.5 h-3.5" />
-          Trusted by 50,000+ customers across Europe
+          A sandbox banking platform to explore
         </div>
         <h1 className="text-5xl md:text-6xl font-bold text-foreground leading-tight tracking-tight mb-6 max-w-3xl mx-auto">
           Banking built for the
@@ -79,15 +78,15 @@ export default async function LandingPage() {
             Sign in to existing account
           </Link>
         </div>
-        <p className="text-sm text-muted-foreground mt-4">No credit card required · FSCS protected up to £85,000</p>
+        <p className="text-sm text-muted-foreground mt-4">No credit card required · Demo environment, not a real bank</p>
 
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 pt-12 border-t border-border">
           {[
-            { value: '€4.2B+', label: 'Processed monthly' },
-            { value: '50k+', label: 'Active users' },
             { value: '8', label: 'Currencies supported' },
-            { value: '99.9%', label: 'Uptime SLA' },
+            { value: '6', label: 'Languages supported' },
+            { value: '3', label: 'Portal types (client/admin/superadmin)' },
+            { value: 'Free', label: 'To try, no card required' },
           ].map(({ value, label }) => (
             <div key={label} className="text-center">
               <div className="text-3xl font-bold text-foreground tracking-tight">{value}</div>
@@ -107,7 +106,7 @@ export default async function LandingPage() {
           <div className="grid md:grid-cols-3 gap-6">
             {[
               {
-                Icon: Globe, color: 'bg-blue-100 text-primary',
+                Icon: Globe, color: 'bg-primary/10 text-primary',
                 title: 'Multi-currency accounts',
                 desc: 'Hold, send and receive in EUR, USD, GBP, CHF, JPY and more. Real exchange rates, always.',
               },
@@ -128,8 +127,8 @@ export default async function LandingPage() {
               },
               {
                 Icon: ShieldCheck, color: 'bg-red-500/10 text-red-600',
-                title: 'Bank-grade security',
-                desc: 'FaceID biometrics, 2FA, real-time fraud detection, and device-level encryption.',
+                title: 'Security-first design',
+                desc: 'Password auth, a separate PIN for every transfer, row-level database security, and a full audit trail.',
               },
               {
                 Icon: Smartphone, color: 'bg-teal-100 text-teal-600',
@@ -179,7 +178,7 @@ export default async function LandingPage() {
             ].map(({ name, price, period, desc, features, cta, accent }) => (
               <div
                 key={name}
-                className={`rounded-2xl p-8 border ${accent ? 'border-blue-600 ring-2 ring-blue-600/20 bg-blue-50/30' : 'border-border bg-card'}`}
+                className={`rounded-2xl p-8 border ${accent ? 'border-primary ring-2 ring-primary/20 bg-primary/5' : 'border-border bg-card'}`}
               >
                 {accent && (
                   <div className="inline-block bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full mb-4">
@@ -224,18 +223,19 @@ export default async function LandingPage() {
               <div className="inline-flex items-center gap-2 bg-white/10 text-white/80 text-sm px-4 py-1.5 rounded-full mb-6">
                 <Lock className="w-3.5 h-3.5" /> Bank-grade security
               </div>
-              <h2 className="text-3xl font-bold mb-4">Your money is safe with us</h2>
+              <h2 className="text-3xl font-bold mb-4">Built with security in mind</h2>
               <p className="text-muted-foreground leading-relaxed mb-8">
-                NovaPay is regulated by the FCA and your funds are protected up to £85,000 by the FSCS.
-                We use AES-256 encryption, real-time fraud monitoring, and biometric authentication.
+                This is a demo environment, not a licensed financial institution — no real funds are held or protected.
+                Every account action here (transfers, cards, KYC uploads) runs against a real Postgres database with
+                row-level security and a full audit log, so the mechanics are genuine even though the money isn't.
               </p>
               <div className="space-y-4">
                 {[
-                  'FCA regulated financial institution',
-                  'FSCS protected up to £85,000',
-                  'Real-time AI fraud detection',
-                  'PCI-DSS Level 1 certified',
-                  '99.9% uptime SLA with 24/7 monitoring',
+                  'Demo environment — no real funds involved',
+                  'Row-level database security on every table',
+                  'PIN confirmation required on every transfer',
+                  'Full audit log of every account-changing action',
+                  'Built with Next.js, Supabase, and TypeScript strict mode',
                 ].map((item) => (
                   <div key={item} className="flex items-center gap-3 text-gray-300 text-sm">
                     <CheckCircle className="w-4 h-4 text-green-400 shrink-0" />
@@ -246,10 +246,10 @@ export default async function LandingPage() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               {[
-                { label: 'Transactions secured', value: '€4.2B+' },
-                { label: 'Fraud detection rate', value: '99.8%' },
-                { label: 'Uptime this year', value: '99.97%' },
-                { label: 'Security audits/year', value: '4' },
+                { label: 'Encryption', value: 'AES-256' },
+                { label: 'Database security', value: 'Row-level' },
+                { label: 'Activity tracking', value: 'Full audit log' },
+                { label: 'Access control', value: 'Role-based' },
               ].map(({ label, value }) => (
                 <div key={label} className="bg-white/5 rounded-2xl p-6 border border-white/10">
                   <div className="text-2xl font-bold text-white mb-1">{value}</div>
@@ -265,7 +265,7 @@ export default async function LandingPage() {
       <section className="py-24 text-center">
         <div className="max-w-2xl mx-auto px-6">
           <h2 className="text-3xl font-bold text-foreground mb-4">Ready to get started?</h2>
-          <p className="text-muted-foreground mb-8">Join 50,000+ people who bank smarter with NovaPay. Takes 5 minutes.</p>
+          <p className="text-muted-foreground mb-8">Try the full NovaPay demo experience. Takes 5 minutes to sign up.</p>
           <Link
             href="/register"
             className="inline-flex items-center gap-2 bg-primary text-white font-semibold px-8 py-3.5 rounded-xl hover:bg-primary/90 transition-colors"
@@ -279,9 +279,7 @@ export default async function LandingPage() {
       <footer className="border-t border-border py-12">
         <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 bg-primary rounded-md flex items-center justify-center">
-              <ShieldCheck className="w-3.5 h-3.5 text-white" />
-            </div>
+            <LogoMark size={24} className="rounded-md" />
             <span className="font-semibold text-foreground">NovaPay</span>
             <span className="text-muted-foreground text-sm ml-2">© 2026</span>
           </div>
@@ -291,7 +289,7 @@ export default async function LandingPage() {
             <a href="#" className="hover:text-foreground">Cookie policy</a>
             <a href="#" className="hover:text-foreground">Contact</a>
           </div>
-          <p className="text-xs text-muted-foreground">FCA authorised · FSCS protected · PCI-DSS L1</p>
+          <p className="text-xs text-muted-foreground">Demo environment · Not a licensed bank · No real funds</p>
         </div>
       </footer>
     </div>

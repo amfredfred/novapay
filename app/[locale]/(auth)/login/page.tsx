@@ -1,8 +1,8 @@
 // app/[locale]/(auth)/login/page.tsx
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ShieldCheck } from 'lucide-react'
 import { LoginForm } from './_components/login-form'
+import { LogoMark } from '@/components/logo'
 
 export const metadata: Metadata = { title: 'Sign in · NovaPay' }
 
@@ -18,9 +18,7 @@ export default async function LoginPage({
       <div className="w-full max-w-sm">
         {/* Logo */}
         <div className="flex items-center justify-center gap-2 mb-8">
-          <div className="w-9 h-9 bg-primary rounded-xl flex items-center justify-center">
-            <ShieldCheck className="w-5 h-5 text-white" />
-          </div>
+          <LogoMark size={36} className="rounded-xl" />
           <span className="font-semibold text-lg text-foreground">NovaPay</span>
         </div>
 

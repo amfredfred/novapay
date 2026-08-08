@@ -7,8 +7,8 @@ export async function requireClient(): Promise<User> {
   const supabase = await createClient()
   const { data: { user }, error } = await supabase.auth.getUser()
   if (error || !user) redirect('/login')
-  const role = (user as User).app_metadata?.['role'] as string | undefined
-  if (role === 'superadmin' || role === 'admin') redirect('/portal-select')
+  // Staff can use the client portal as themselves — that's what "My banking app"
+  // on /portal-select links to, so this must not bounce them back there.
   return user as User
 }
 

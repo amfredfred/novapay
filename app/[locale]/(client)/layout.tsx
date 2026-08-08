@@ -9,10 +9,8 @@ async function requireClient() {
   const supabase = await createClient()
   const { data: { user }, error } = await supabase.auth.getUser()
   if (error || !user) redirect('/login')
-  // Redirect staff to their portals
-  const role = user.app_metadata?.['role'] as string | undefined
-  if (role === 'superadmin') redirect('/superadmin/dashboard')
-  if (role === 'admin') redirect('/admin/dashboard')
+  // Staff can use the client portal as themselves — this is the same destination
+  // /portal-select's "My banking app" card links to, so it must not bounce them away.
   return user
 }
 

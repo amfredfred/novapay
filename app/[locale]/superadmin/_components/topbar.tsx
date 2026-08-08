@@ -40,8 +40,7 @@ export function Topbar({ adminEmail, adminId }: Props) {
 
       <div className="flex items-center gap-3">
         {/* System health indicator */}
-        <div className="flex items-center gap-1.5 text-xs text-muted-foreground
-          border border-border rounded-full px-3 py-1.5">
+        <div className="flex items-center gap-1.5 text-xs text-muted-foreground border border-border rounded-full px-3 py-1.5">
           <Circle className="h-2 w-2 fill-emerald-500 text-emerald-500" />
           <span>All systems operational</span>
         </div>

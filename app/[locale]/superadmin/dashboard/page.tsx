@@ -18,33 +18,57 @@ export const metadata: Metadata = { title: 'Dashboard' }
 // PPR: this segment is dynamically rendered but children can be static
 export const dynamic = 'force-dynamic'
 
+/** Percent change vs. a count taken 30 days ago. Null when there's nothing to compare against. */
+function pctChange(current: number, past: number): number | null {
+  if (past === 0) return null
+  return Math.round(((current - past) / past) * 1000) / 10
+}
+
 async function getDashboardData() {
   const supabase = await createClient()
+  const thirtyDaysAgo = new Date(Date.now() - 30 * 86_400_000).toISOString()
 
   const [
     { count: totalUsers },
+    { count: usersThirtyDaysAgo },
     { count: activeAccounts },
+    { count: accountsThirtyDaysAgo },
     { count: pendingKyc },
     { count: fraudToday },
     { data: balances },
     { data: revenueData },
+    { count: txCompleted30d },
+    { count: txFailed30d },
   ] = await Promise.all([
     supabase.from('profiles').select('*', { count: 'exact', head: true }),
+    supabase.from('profiles').select('*', { count: 'exact', head: true }).lt('created_at', thirtyDaysAgo),
     supabase.from('accounts').select('*', { count: 'exact', head: true }).eq('is_blocked', false),
+    supabase.from('accounts').select('*', { count: 'exact', head: true }).eq('is_blocked', false).lt('created_at', thirtyDaysAgo),
     supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('kyc_status', 'pending'),
     supabase.from('fraud_flags')
       .select('*', { count: 'exact', head: true })
       .gte('created_at', new Date(Date.now() - 86_400_000).toISOString()),
     supabase.from('account_balances_by_currency').select('*'),
     supabase.rpc('get_revenue_trend', { months_back: 12 }),
+    supabase.from('transactions').select('*', { count: 'exact', head: true })
+      .eq('status', 'completed').gte('created_at', thirtyDaysAgo),
+    supabase.from('transactions').select('*', { count: 'exact', head: true })
+      .in('status', ['failed', 'reversed']).gte('created_at', thirtyDaysAgo),
   ])
+
+  const completed = txCompleted30d ?? 0
+  const failed = txFailed30d ?? 0
+  const totalTx = completed + failed
 
   return {
     totalUsers:      totalUsers ?? 0,
+    usersTrend:      pctChange(totalUsers ?? 0, usersThirtyDaysAgo ?? 0),
     activeAccounts:  activeAccounts ?? 0,
+    accountsTrend:   pctChange(activeAccounts ?? 0, accountsThirtyDaysAgo ?? 0),
     pendingKyc:      pendingKyc ?? 0,
     fraudToday:      fraudToday ?? 0,
-    systemHealthPct: 99.7,
+    // Real success rate over the last 30 days of transactions, not a hardcoded figure.
+    systemHealthPct: totalTx > 0 ? Math.round((completed / totalTx) * 1000) / 10 : 100,
     balances:        balances ?? [],
     revenueData:     (revenueData ?? []) as Array<{ month: string; revenue: number; tx_count: number }>,
   }
@@ -122,19 +146,18 @@ export default async function DashboardPage() {
           label="Total users"
           value={data.totalUsers.toLocaleString()}
           icon={Users}
-          trend={{ value: 4.2, label: 'vs last month' }}
+          {...(data.usersTrend !== null ? { trend: { value: data.usersTrend, label: 'vs 30 days ago' } } : {})}
         />
         <KpiCard
           label="Active accounts"
           value={data.activeAccounts.toLocaleString()}
           icon={Activity}
-          trend={{ value: 2.1, label: 'vs last month' }}
+          {...(data.accountsTrend !== null ? { trend: { value: data.accountsTrend, label: 'vs 30 days ago' } } : {})}
         />
         <KpiCard
           label="Total volume"
           value={formatCurrencyCompact(totalVolume, 'EUR')}
           icon={TrendingUp}
-          trend={{ value: 11.3, label: 'vs last month' }}
         />
         <KpiCard
           label="Fraud flags today"

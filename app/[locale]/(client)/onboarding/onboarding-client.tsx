@@ -96,7 +96,7 @@ export function OnboardingClient({ userId, products }: Props) {
             <div className="grid grid-cols-3 gap-4 mb-8">
               {[
                 { icon: Globe, label: '8 currencies', sub: 'Hold & exchange' },
-                { icon: ShieldCheck, label: 'FSCS protected', sub: 'Up to £85,000' },
+                { icon: ShieldCheck, label: 'Demo account', sub: 'No real funds' },
                 { icon: Landmark, label: 'Free SEPA', sub: 'Instant transfers' },
               ].map(({ icon: Icon, label, sub }) => (
                 <div key={label} className="bg-card rounded-xl border border-border p-4 text-center">

@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { requireSuperadmin } from '@/lib/auth'
 import { createClient } from '@/lib/supabase/server'
 import { GlobalSettingsForm } from './_components/global-settings-form'
-import { ServiceHealthGrid } from './_components/service-health-grid'
+import { SystemHealthPanel } from './_components/system-health-panel'
 import { RealtimeLogFeed } from './_components/realtime-log-feed'
 
 export const metadata: Metadata = { title: 'System · NovaPay Superadmin' }
@@ -48,7 +48,7 @@ export default async function SystemPage() {
           <GlobalSettingsForm settings={settings as Parameters<typeof GlobalSettingsForm>[0]['settings']} />
         </div>
         <div className="space-y-6">
-          <ServiceHealthGrid />
+          <SystemHealthPanel />
           <RealtimeLogFeed />
         </div>
       </div>
